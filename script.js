@@ -10,6 +10,7 @@ const startPauseBt = document.querySelector('#start-pause');
 const musicafocoInput = document.querySelector('#alternar-musica');
 const IniciarOuPausarBt = document.querySelector('#start-pause span');
 const tempoNaTela = document.querySelector('#timer');
+
 const musica = new Audio('sons/luna-rise-part-one.mp3');
 const musicaPlay = new Audio('sons/play.wav');
 const musicaPause = new Audio('sons/pause.mp3');
@@ -72,6 +73,11 @@ const contagemRegressiva = () =>{
     if(tempoDeCorridoEmSegundos <= 0){
         chegaraZero.play()
         alert('Tempo finalizado!')
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco'
+        if (focoAtivo){
+            const evento = new CustomEvent('FocoFinalizado')
+            document.dispatchEvent(evento)
+        }
         Zerar()
         return
     }
